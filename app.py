@@ -1,6 +1,6 @@
 from flask import Flask,jsonify,request
 from pymongo import MongoClient
-
+from libindic.normalizer import Normalizer
 
 import sys,os,json
 import pandas as pd
@@ -9,6 +9,9 @@ app = Flask(__name__)
 db = MongoClient()
 olam = db['olam']['olam-enml']
 APP_ROOT = os.path.dirname(__file__)
+
+nm = Normalizer()
+
 def import_csv_to_db():
 	file_res = os.path.join(APP_ROOT, 'olam-enml.csv')
 	print file_res
@@ -25,6 +28,9 @@ def index():
 def search():
 	result = []
 	text = request.args['text']
+	print text
+	text = nm.normalize(text)
+
 	r = olam.find({'malayalam_definition':text})
 	for i in r:
 		result.append(i['english_word'])
