@@ -6,6 +6,7 @@ Requirements
 =========================
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 * Python
+* [Libindic Normalizer](https://github.com/libindic/normalizer), already included under `dist/`
 
 Install
 =========================
@@ -13,6 +14,7 @@ Install
 ```bash
 $ git clone https://github.com/sreecodeslayer/olam-ml-en.git
 $ cd olam-ml-en
+$ pip install dist/libindic-normalizer*.tar.gz 
 $ pip install -r requirements.txt
 $ python app.py
 ```
@@ -68,3 +70,7 @@ will give a `JSON` output as:
   ]
 }
 ```
+
+Mentions
+=========================
+* [Libindic Normalizer](https://github.com/libindic/normalizer) for the module to handle ZWNJ Chillu in Malayalam texts.
