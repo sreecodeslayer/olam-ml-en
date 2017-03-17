@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="MalEng">
+<head>
+
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>MalEng Dictionary</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/darkly/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body ng-controller="MainController">
+<div id="wrapper">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 2%">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/#/">MalEng Dictionary</a>
+		</div>
+	</nav>
+	<div class="container">
+	<!-- Jumbotron -->
+		<div class="jumbotron">
+			<h1>MalEng Dictionary</h1>
+			<p>This is a simple Malayalam to English Dictionary built based on the open Olam Dataset.</p>
+			<p><a class="btn btn-info btn-lg" href="https://olam.in/open">Learn more</a></p>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-body">
+			  <form role="search" _lpchecked="1" ng-submit="search()" target="blank">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+						<input type="text" class="form-control input-lg" ng-model="text" placeholder="Enter the Malayalam word/phrase">
+						<span class="input-group-btn"><button type="submit" class="btn btn-lg btn-success">Find Meaning</button></span>
+					</div>
+				</div>
+			  </form>
+			</div>
+		</div>
+		<div class="panel panel-success" id="result-panel">
+			<div class="panel-heading">
+				<h4 class="panel-title">Results</h4>
+			</div>
+			<div class="panel-body" style="max-height:calc(100vh - 700px) !important;overflow-y: auto;">
+				<div class="well" ng-show="results.length == 0">No meanings found <i class="fa fa-frown-o" aria-hidden="true"></i> , perhaps you could check spelling <i class="fa fa-smile-o" aria-hidden="true"></i></div>
+				<div class="well" ng-repeat="result in results">[[ $index+1 ]]. [[ result ]]<hr></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
