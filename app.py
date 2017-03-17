@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request,render_template,url_for
 from pymongo import MongoClient
 from libindic.normalizer import Normalizer
 
@@ -22,20 +22,19 @@ def import_csv_to_db():
 
 @app.route('/')
 def index():
-	return jsonify({'hi':'welcome!'})
+	return render_template('index.html')
 
 @app.route('/search',methods=['GET'])
 def search():
 	result = []
 	text = request.args['text']
-	print text
 	text = nm.normalize(text)
 
 	r = olam.find({'malayalam_definition':text})
 	for i in r:
 		result.append(i['english_word'])
 
-	return jsonify({'result':result})
+	return jsonify({'results':result})
 
 if __name__ == '__main__':
 	import_csv_to_db()
